@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Admin Suspicious Transactions</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="phone-screen portfolio-screen">
+      <div class="app-shell">
+        <div class="app-header">
+          <div class="header-row">
+            <div>
+              <p class="eyebrow">Admin console</p>
+              <h1>Suspicious transactions</h1>
+            </div>
+            <div class="status-pill">Review mode</div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div>
+            <p class="muted">Flagged activity</p>
+            <h2>8 alerts</h2>
+            <p class="muted">3 high-risk items need immediate review</p>
+          </div>
+          <div class="hero-badge">Monitor</div>
+        </div>
+
+        <div class="card-section">
+          <div class="section-title">
+            <h3>Risk summary</h3>
+            <span>Last 24 hours</span>
+          </div>
+          <div class="alert-list">
+            <div class="alert-card">
+              <span class="alert-badge">High risk</span>
+              <h4>Wire transfer $12,400</h4>
+              <p class="muted">New beneficiary added after midnight with a series of rapid transfers.</p>
+              <p><strong>Reason:</strong> Unusual recipient pattern and funding source.</p>
+            </div>
+            <div class="alert-card">
+              <span class="alert-badge alert-warning">Medium risk</span>
+              <h4>Purchase order $8,900</h4>
+              <p class="muted">Large order placed from a newly registered account.</p>
+              <p><strong>Reason:</strong> First-time beneficiary with irregular velocity.</p>
+            </div>
+            <div class="alert-card">
+              <span class="alert-badge">High risk</span>
+              <h4>Account change request</h4>
+              <p class="muted">Multiple profile updates detected in a short window.</p>
+              <p><strong>Reason:</strong> Rapid KYC document replacement and address change.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-section">
+          <div class="section-title">
+            <h3>Review actions</h3>
+          </div>
+          <div class="chip-row">
+            <a class="chip primary" href="/">Return home</a>
+            <a class="chip" href="/portfolio">Open portfolio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const adminAccessKey = 'demo-admin-access';
+    if (window.location.pathname === '/admin' && !sessionStorage.getItem(adminAccessKey)) {
+      window.location.replace('/');
+    }
+  </script>
+  <script src="/js/voice.js"></script>
+</body>
+</html>

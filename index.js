@@ -31,7 +31,11 @@ app.get('/solaris/buy', (req, res) => {
 app.get('/profile', (req, res) => {
   res.render('profile');
 });
-
+ 
+app.get('/admin', (req, res) => {
+  res.render('admin');
+});
+ 
 app.get('/ekyc', (req, res) => {
   res.render('ekyc-start');
 });

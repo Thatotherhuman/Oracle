@@ -479,14 +479,15 @@ body {
 .demo-nav-panel {
   position: fixed;
   top: 14px;
-  left: 14px;
+  right: 14px;
+  left: auto;
   z-index: 40;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 8px;
 }
-
+ 
 .demo-nav-toggle {
   border: none;
   border-radius: 999px;
@@ -526,7 +527,45 @@ body {
   cursor: pointer;
   text-decoration: none;
 }
-
+ 
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+ 
+.alert-card {
+  background: white;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 8px 18px rgba(34, 58, 107, 0.08);
+  border-left: 4px solid #d9485f;
+}
+ 
+.alert-card h4 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  color: #0f1f3d;
+}
+ 
+.alert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #ffe3e6;
+  color: #b6404e;
+  margin-bottom: 10px;
+}
+ 
+.alert-warning {
+  background: #fff7e6;
+  color: #b97a2e;
+}
+ 
 .voice-command-btn {
   border: none;
   border-radius: 50%;
@@ -537,6 +576,8 @@ body {
   background: #4f7cff;
   color: white;
 }
+
+/* removed mascot branding styles (header-right, brand-logo, avatar-img) */
 
 .voice-command-btn.listening {
   animation: pulse 1s infinite;

@@ -37,20 +37,27 @@
   const demoList = document.createElement('div');
   demoList.className = 'demo-nav-list';
 
+  const adminAccessKey = 'demo-admin-access';
   const demoActions = [
-    { label: 'Home', href: '/' },
-    { label: 'Portfolio', href: '/portfolio' },
-    { label: 'Solaris', href: '/solaris' },
-    { label: 'Profile', href: '/profile' },
-    { label: 'EKYC', href: '/ekyc' }
+   { label: 'Home', href: '/' },
+   { label: 'Portfolio', href: '/portfolio' },
+   { label: 'Solaris', href: '/solaris' },
+   { label: 'Profile', href: '/profile' },
+   { label: 'EKYC', href: '/ekyc' },
+   { label: 'Admin', href: '/admin' }
   ];
-
+ 
   demoActions.forEach((action) => {
-    const link = document.createElement('a');
-    link.className = 'demo-nav-btn';
-    link.href = action.href;
-    link.textContent = action.label;
-    demoList.appendChild(link);
+   const link = document.createElement('a');
+   link.className = 'demo-nav-btn';
+   link.href = action.href;
+   link.textContent = action.label;
+   if (action.href === '/admin') {
+     link.addEventListener('click', () => {
+       sessionStorage.setItem(adminAccessKey, 'true');
+     });
+   }
+   demoList.appendChild(link);
   });
 
   demoToggle.addEventListener('click', () => {
