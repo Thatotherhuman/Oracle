@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Portfolio Overview</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="phone-screen portfolio-screen">
+      <div class="app-shell">
+        <div class="app-header">
+          <div class="header-row">
+            <div>
+              <p class="eyebrow">Portfolio</p>
+              <h1>Performance</h1>
+            </div>
+            <div class="status-pill">Live</div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div>
+            <p class="muted">Total value</p>
+            <h2>$124,850</h2>
+            <p class="muted">+ $400 this week</p>
+          </div>
+          <div class="hero-badge">Balanced</div>
+        </div>
+
+        <div class="card-section">
+          <div class="section-title">
+            <h3>Owned assets</h3>
+            <span>Scroll through positions</span>
+          </div>
+          <div class="stock-row">
+            <div class="stock-card accent-blue">
+              <h4>Solaris</h4>
+              <div class="stock-price">$42.18</div>
+              <div class="stock-change negative">-1.4%</div>
+            </div>
+            <div class="stock-card">
+              <h4>Concrete TM</h4>
+              <div class="stock-price">$86.40</div>
+              <div class="stock-change positive">+3.2%</div>
+            </div>
+            <div class="stock-card accent-red">
+              <h4>Northstar</h4>
+              <div class="stock-price">$28.95</div>
+              <div class="stock-change negative">-0.8%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-section">
+          <div class="section-title">
+            <h3>Portfolio trend</h3>
+            <span>Last 7 days</span>
+          </div>
+          <div class="chart-card">
+            <div class="chart-label">Total value over time</div>
+            <svg class="portfolio-chart" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="lineFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2d5be8" stop-opacity="0.25" />
+                  <stop offset="100%" stop-color="#2d5be8" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <polyline
+                points="0,120 45,130 90,100 135,110 180,70 225,85 270,40 320,30"
+                fill="none" stroke="#dfe8ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+              <polygon
+                points="0,120 45,130 90,100 135,110 180,70 225,85 270,40 320,30 320,180 0,180"
+                fill="url(#lineFill)" />
+              <polyline
+                points="0,120 45,130 90,100 135,110 180,70 225,85 270,40 320,30"
+                fill="none" stroke="#2d5be8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="320" cy="30" r="5" fill="#2d5be8" />
+            </svg>
+            <div class="chart-value">$124,850</div>
+          </div>
+        </div>
+
+        <div class="card-section">
+          <div class="section-title">
+            <h3>Allocation</h3>
+            <span>By holding</span>
+          </div>
+          <div class="chart-card">
+            <div class="chart-label">Position weight</div>
+            <svg class="portfolio-chart" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <rect x="30" y="60" width="60" height="110" rx="8" fill="#4f7cff" />
+              <text x="60" y="50" text-anchor="middle" font-size="13" font-weight="700" fill="#223a6b">42%</text>
+              <text x="60" y="176" text-anchor="middle" font-size="11" fill="#6b7a99" transform="translate(0,4)"></text>
+
+              <rect x="130" y="20" width="60" height="150" rx="8" fill="#2d5be8" />
+              <text x="160" y="10" text-anchor="middle" font-size="13" font-weight="700" fill="#223a6b">58%</text>
+
+              <rect x="230" y="100" width="60" height="70" rx="8" fill="#8fa8f2" />
+              <text x="260" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#223a6b">27%</text>
+            </svg>
+            <div style="display:flex; justify-content:space-around; margin-top: 4px;">
+              <span style="font-size:12px; color:#6b7a99; font-weight:600;">Solaris</span>
+              <span style="font-size:12px; color:#6b7a99; font-weight:600;">Concrete TM</span>
+              <span style="font-size:12px; color:#6b7a99; font-weight:600;">Northstar</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-section">
+          <div class="section-title">
+            <h3>Insights</h3>
+          </div>
+          <div class="info-card summary-list">
+            <div class="summary-item">Your portfolio has increased by $400 since your last review.</div>
+            <div class="summary-item">Solaris remains the weakest position due to downside pressure.</div>
+            <div class="summary-item">Concrete TM is showing the strongest upward momentum.</div>
+          </div>
+        </div>
+
+        <div class="card-section">
+          <div class="chip-row">
+            <button class="chip primary" type="button" data-message="Your portfolio has increased by $400 since your last review. Solaris remains the weakest position due to continued downside pressure, while Concrete TM is showing the strongest upward momentum." data-voice-action="portfolio-summary">Portfolio summary</button>
+            <button class="chip" type="button" data-message="Based on current market conditions, it would be prudent to reduce exposure to Solaris and consider rebalancing toward more stable holdings." data-voice-action="portfolio-recommendation">Investment advice</button>
+            <a class="chip" href="/solaris">Open Solaris</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="messageOverlay" class="message-overlay hidden" role="status" aria-live="polite">
+        <div class="message-card"></div>
+      </div>
+
+      <script>
+        const overlay = document.getElementById('messageOverlay');
+        const messageCard = overlay.querySelector('.message-card');
+
+        function showMessage(text) {
+          messageCard.textContent = text;
+          overlay.classList.remove('hidden');
+          clearTimeout(window.messageTimer);
+          window.messageTimer = setTimeout(() => overlay.classList.add('hidden'), 4000);
+        }
+
+        document.querySelectorAll('.chip').forEach((button) => {
+          if (button.dataset.message) {
+            button.addEventListener('click', () => showMessage(button.dataset.message));
+          }
+        });
+      </script>
+    </div>
+  </div>
+  <script src="/js/voice.js"></script>
+</body>
+</html>

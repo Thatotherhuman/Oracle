@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Sell Solaris</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="phone-screen portfolio-screen">
+      <div class="app-shell">
+        <div class="app-header">
+          <div class="header-row">
+            <div>
+              <p class="eyebrow">Trade</p>
+              <h1>Sell Solaris</h1>
+            </div>
+            <div class="status-pill">Live</div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div>
+            <p class="muted">Current price</p>
+            <h2>$42.18</h2>
+          </div>
+          <div class="hero-badge">-1.8%</div>
+        </div>
+
+        <div class="card-section">
+          <div class="section-title">
+            <h3>Select amount</h3>
+            <span>USD</span>
+          </div>
+          <div class="amount-grid">
+            <button class="chip amount-chip" type="button" data-amount="400" data-voice-action="trade-400">400</button>
+            <button class="chip amount-chip" type="button" data-amount="850" data-voice-action="trade-850">850</button>
+            <button class="chip amount-chip" type="button" data-amount="1500" data-voice-action="trade-1500">1500</button>
+            <a class="chip amount-chip" href="/solaris">Back</a>
+          </div>
+        </div>
+
+        <div class="card-section">
+          <div class="section-title">
+            <h3>Or enter a custom amount</h3>
+          </div>
+          <div class="info-card">
+            <input
+              type="number"
+              id="customAmount"
+              inputmode="decimal"
+              placeholder="Type an amount, e.g. 2500"
+              data-voice-action="trade-custom"
+              style="width:100%; border:none; font-size:16px; font-weight:700; color:#223a6b; outline:none; background:transparent;"
+            />
+
+          </div>
+          <div class="chip-row">
+            <button class="chip primary" type="button" id="confirmCustomAmount">Confirm amount</button>
+          </div>
+        </div>
+
+        <div class="card-section">
+          <div class="info-card">
+            <p>You can sell up to your current Solaris holdings. Orders above your available balance will be adjusted automatically.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="messageOverlay" class="message-overlay hidden" role="status" aria-live="polite">
+        <div class="message-card"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('messageOverlay');
+    const messageCard = overlay.querySelector('.message-card');
+    const customAmountInput = document.getElementById('customAmount');
+
+    function showMessage(text) {
+      messageCard.textContent = text;
+      overlay.classList.remove('hidden');
+      clearTimeout(window.messageTimer);
+      window.messageTimer = setTimeout(() => overlay.classList.add('hidden'), 4000);
+    }
+
+    function processAmount(amount) {
+      const numericAmount = Number(amount);
+
+      if (!numericAmount || numericAmount <= 0) {
+        showMessage('Please enter a valid amount to continue.');
+        return;
+      }
+
+      showMessage(`Placing sell order for ${numericAmount.toLocaleString()} in Solaris...`);
+
+    }
+
+    // Preset amount chips
+    document.querySelectorAll('.amount-chip[data-amount]').forEach((btn) => {
+      btn.addEventListener('click', () => processAmount(btn.dataset.amount));
+    });
+
+    // Custom amount: confirm button
+    document.getElementById('confirmCustomAmount').addEventListener('click', () => {
+      processAmount(customAmountInput.value);
+    });
+
+    // Custom amount: Enter key
+    customAmountInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        processAmount(customAmountInput.value);
+      }
+    });
+
+    // Voice input hook — matches the pattern used on the Buy Solaris page
+    customAmountInput.addEventListener('voice-result', (e) => {
+      const spokenAmount = e.detail?.value;
+      if (spokenAmount) {
+        customAmountInput.value = spokenAmount;
+        processAmount(spokenAmount);
+      }
+    });
+  </script>
+  <script src="/js/voice.js"></script>
+</body>
+</html>

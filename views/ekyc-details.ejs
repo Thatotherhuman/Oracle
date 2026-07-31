@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>EKYC Details</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="phone-screen portfolio-screen">
+      <div class="app-header">
+        <h1>Step 1</h1>
+        <p>Personal details</p>
+      </div>
+
+      <div class="profile-stats">
+        <div class="stat-card"><span>Name</span><strong>Alex Carter</strong></div>
+        <div class="stat-card"><span>Date of birth</span><strong>14/03/1990</strong></div>
+        <div class="stat-card"><span>Email</span><strong>alex@email.com</strong></div>
+      </div>
+
+      <div class="profile-card">
+        <p class="profile-email">Please review your details. This step confirms your personal information.</p>
+      </div>
+
+      <div class="menu-list">
+        <a class="menu-btn" href="/ekyc/face" data-voice-action="start-face-scan">Continue to face scan</a>
+        <a class="menu-btn exit-btn" href="/ekyc">Back</a>
+      </div>
+
+      <div id="messageOverlay" class="message-overlay hidden" role="status" aria-live="polite">
+        <div class="message-card">Please review your personal details. Confirm details to continue.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('messageOverlay');
+    overlay.classList.remove('hidden');
+    setTimeout(() => overlay.classList.add('hidden'), 4000);
+  </script>
+  <script src="/js/voice.js"></script>
+</body>
+</html>

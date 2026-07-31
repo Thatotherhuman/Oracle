@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Face Scan</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="phone-screen portfolio-screen">
+      <div class="app-shell">
+        <div class="app-header">
+          <div class="header-row">
+            <div>
+              <p class="eyebrow">Security</p>
+              <h1>Face scan</h1>
+            </div>
+            <div class="status-pill">Guided</div>
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="avatar">◉</div>
+          <h2>Look at the camera</h2>
+          <p class="profile-email">The app will guide you through the scan with voice instructions.</p>
+        </div>
+
+        <div class="card-section">
+          <div class="info-card summary-list">
+            <div class="summary-item">Please keep your face centered and still.</div>
+            <div class="summary-item">A confirmation tone will play when the scan succeeds.</div>
+            <div class="summary-item">After that, the app will guide you to the next step.</div>
+          </div>
+        </div>
+
+        <div class="chip-row">
+          <button class="chip primary" type="button" id="startFaceScan" data-voice-action="start-face-scan">Start scan</button>
+          <a class="chip" href="/ekyc/details">Back</a>
+        </div>
+      </div>
+
+      <div id="messageOverlay" class="message-overlay hidden" role="status" aria-live="polite">
+        <div class="message-card"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('messageOverlay');
+    const messageCard = overlay.querySelector('.message-card');
+    const startBtn = document.getElementById('startFaceScan');
+
+    function showMessage(text) {
+      messageCard.textContent = text;
+      overlay.classList.remove('hidden');
+      clearTimeout(window.messageTimer);
+      window.messageTimer = setTimeout(() => overlay.classList.add('hidden'), 4000);
+    }
+
+    const audioContext = window.AudioContext || window.webkitAudioContext;
+    function playDing() {
+      if (!audioContext) {
+        return;
+      }
+      const ctx = new audioContext();
+      const oscillator = ctx.createOscillator();
+      const gain = ctx.createGain();
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(880, ctx.currentTime);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.4);
+      oscillator.connect(gain);
+      gain.connect(ctx.destination);
+      oscillator.start();
+      oscillator.stop(ctx.currentTime + 0.4);
+      ctx.close();
+    }
+
+    startBtn.addEventListener('click', () => {
+      startBtn.disabled = true; // prevent double-clicks while the scan "runs"
+
+      const instructions = 'Please look straight ahead. Keep your face centered. The scan will begin now.';
+      showMessage(instructions);
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(instructions);
+        utterance.lang = 'en-US';
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(utterance);
+      }
+
+      setTimeout(() => {
+        playDing();
+        const success = 'Face scan complete. Your identity has been verified. Please continue to the next step.';
+        showMessage(success);
+        if ('speechSynthesis' in window) {
+          const successUtterance = new SpeechSynthesisUtterance(success);
+          successUtterance.lang = 'en-US';
+          window.speechSynthesis.speak(successUtterance);
+        }
+
+        // Give the user a moment to see/hear the success message, then move on
+        setTimeout(() => {
+          window.location.href = '/ekyc/identity';
+        }, 2200);
+      }, 1800);
+    });
+  </script>
+  <script src="/js/voice.js"></script>
+</body>
+</html>

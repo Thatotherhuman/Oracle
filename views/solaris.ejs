@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Solaris Overview</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="phone-screen portfolio-screen">
+      <div class="app-shell">
+        <div class="app-header">
+          <div class="header-row">
+            <div>
+              <p class="eyebrow">Holding</p>
+              <h1>Solaris Inc.</h1>
+            </div>
+            <div class="status-pill">Watchlist</div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div>
+            <p class="muted">Current price</p>
+            <h2>$42.18</h2>
+            <p class="muted">1,500 shares owned</p>
+          </div>
+          <div class="hero-badge">-1.4%</div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <p class="chart-label">Past 7 days</p>
+        <svg class="portfolio-chart" viewBox="0 0 320 180" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="declineFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d9485f" stop-opacity="0.18" />
+              <stop offset="100%" stop-color="#d9485f" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+
+          <polygon
+            points="0,40 45,55 90,50 135,75 180,90 225,110 270,125 320,150 320,180 0,180"
+            fill="url(#declineFill)"
+          />
+
+          <polyline
+            points="0,40 45,55 90,50 135,75 180,90 225,110 270,125 320,150"
+            fill="none"
+            stroke="#d9485f"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+
+          <circle cx="320" cy="150" r="5" fill="#d9485f" />
+        </svg>
+        <p class="chart-value">$42.18</p>
+      </div>
+
+      <div class="app-shell">
+        <div class="card-section">
+          <div class="section-title">
+            <h3>Market details</h3>
+          </div>
+          <div class="info-card">
+            <p><strong>Market cap:</strong> $8.2B</p>
+            <p><strong>Volume:</strong> 1.4M</p>
+            <p><strong>52W range:</strong> $31.20 - $58.90</p>
+          </div>
+        </div>
+
+        <div class="card-section">
+          <div class="section-title">
+            <h3>Quick actions</h3>
+          </div>
+          <div class="chip-row">
+            <a class="chip primary" href="/solaris/buy">Invest</a>
+            <a class="chip" href="/solaris/sell">Sell</a>
+            <a class="chip" href="/portfolio">Back</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="messageOverlay" class="message-overlay hidden" role="status" aria-live="polite">
+        <div class="message-card"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('messageOverlay');
+    const messageCard = overlay.querySelector('.message-card');
+
+    function showMessage(text) {
+      messageCard.textContent = text;
+      overlay.classList.remove('hidden');
+      clearTimeout(window.messageTimer);
+      window.messageTimer = setTimeout(() => overlay.classList.add('hidden'), 4000);
+    }
+
+    window.addEventListener('load', () => {
+      showMessage('Your Solaris position has declined by $200 over the past week. Current trend indicators remain negative, and the stock is showing sustained downward momentum.');
+    });
+  </script>
+  <script src="/js/voice.js"></script>
+</body>
+</html>

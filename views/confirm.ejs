@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Order Confirmed</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="phone-screen portfolio-screen">
+      <div class="app-shell">
+        <div class="app-header">
+          <div class="header-row">
+            <div>
+              <p class="eyebrow">Trade</p>
+              <h1 id="confirmTitle">Order confirmed</h1>
+            </div>
+            <div class="status-pill">Done</div>
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="avatar">✓</div>
+          <h2 id="confirmHeadline">Your order has been placed</h2>
+          <p class="profile-email" id="confirmSubtext">Solaris order submitted successfully.</p>
+        </div>
+
+        <div class="card-section">
+          <div class="section-title">
+            <h3>Order summary</h3>
+          </div>
+          <div class="info-card">
+            <p><strong>Asset:</strong> Solaris</p>
+            <p><strong>Side:</strong> <span id="summarySide">—</span></p>
+            <p><strong>Amount:</strong> <span id="summaryAmount">—</span></p>
+            <p><strong>Status:</strong> Completed</p>
+          </div>
+        </div>
+
+        <div class="card-section">
+          <div class="chip-row">
+            <a class="chip primary" href="/portfolio" data-voice-action="back-to-portfolio">Back to portfolio</a>
+            <a class="chip" href="/solaris">View Solaris</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="messageOverlay" class="message-overlay hidden" role="status" aria-live="polite">
+        <div class="message-card"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('messageOverlay');
+    const messageCard = overlay.querySelector('.message-card');
+
+    function showMessage(text) {
+      messageCard.textContent = text;
+      overlay.classList.remove('hidden');
+      clearTimeout(window.messageTimer);
+      window.messageTimer = setTimeout(() => overlay.classList.add('hidden'), 4000);
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const amount = Number(params.get('amount'));
+    const side = (params.get('side') || 'buy').toLowerCase() === 'sell' ? 'sell' : 'buy';
+
+    const sideLabel = side === 'sell' ? 'Sell' : 'Buy';
+    const formattedAmount = amount ? `$${amount.toLocaleString()}` : '—';
+
+    document.getElementById('summarySide').textContent = sideLabel;
+    document.getElementById('summaryAmount').textContent = formattedAmount;
+
+    document.getElementById('confirmHeadline').textContent =
+      side === 'sell' ? 'Your sell order is complete' : 'Your buy order is complete';
+
+    document.getElementById('confirmSubtext').textContent = amount
+      ? `${sideLabel} order for ${formattedAmount} of Solaris was placed successfully.`
+      : 'Your Solaris order was placed successfully.';
+
+    window.addEventListener('load', () => {
+      const message = amount
+        ? `${sideLabel} order for ${formattedAmount} of Solaris confirmed. Say portfolio to go back.`
+        : 'Order confirmed. Say portfolio to go back.';
+      showMessage(message);
+
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(message);
+        utterance.lang = 'en-US';
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(utterance);
+      }
+    });
+  </script>
+  <script src="/js/voice.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>EKYC Complete</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="phone-screen portfolio-screen">
+      <div class="app-header">
+        <h1>Verification Submitted</h1>
+        <p>Your account is now compliant</p>
+      </div>
+
+      <div class="profile-card">
+        <div class="avatar">✓</div>
+        <h2>Compliance check complete</h2>
+        <p class="profile-email">You can now continue with investing actions.</p>
+        <p class="profile-email">You have completed the verification process.</p>
+      </div>
+
+      <div class="menu-list">
+        <a class="menu-btn" href="/portfolio" data-voice-action="open-portfolio">Open portfolio</a>
+        <a class="menu-btn exit-btn" href="/">Home</a>
+      </div>
+
+      <div id="messageOverlay" class="message-overlay hidden" role="status" aria-live="polite">
+        <div class="message-card">Verification complete. You may now continue to your portfolio.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('messageOverlay');
+    localStorage.setItem('ekycComplete', 'true');
+    overlay.classList.remove('hidden');
+    setTimeout(() => overlay.classList.add('hidden'), 4000);
+  </script>
+  <script src="/js/voice.js"></script>
+</body>
+</html>

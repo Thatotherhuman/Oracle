@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>EKYC Identity Check</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="phone-screen portfolio-screen">
+      <div class="app-header">
+        <h1>Step 2</h1>
+        <p>Identity check</p>
+      </div>
+
+      <div class="profile-card">
+        <div class="avatar">📄</div>
+        <h2>Upload ID</h2>
+        <p class="profile-email">Document upload placeholder for demo purposes.</p>
+        <p class="profile-email">This step checks your identity before investing.</p>
+      </div>
+
+      <div class="menu-list">
+        <a class="menu-btn" href="/ekyc/review" data-voice-action="upload-id">Upload AlexID.png</a>
+        <a class="menu-btn exit-btn" href="/ekyc/details">Back</a>
+      </div>
+
+      <div id="messageOverlay" class="message-overlay hidden" role="status" aria-live="polite">
+        <div class="message-card">Please upload your identity document. The app will say Upload AlexID.png when ready.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('messageOverlay');
+    overlay.classList.remove('hidden');
+    setTimeout(() => overlay.classList.add('hidden'), 4000);
+  </script>
+  <script src="/js/voice.js"></script>
+</body>
+</html>
